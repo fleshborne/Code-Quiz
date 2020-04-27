@@ -6,30 +6,75 @@ var questionEl = document.querySelector("#question");
 var questionElContainer = document.querySelector("#question-container")
 var answerBtnElement = document.querySelector("#answer-buttons");
 var scoreContainer = document.querySelector("#score-container");
+
+var questions = [
+    {
+        question: "What is the purpose Bootstrap?",
+        answers: [
+            { text: "Space ship", correct: false },
+            { text: "9", correct: false },
+            { text: "pizza", correct: true },
+            { text: "110", correct: false },
+        ],
+    },
+    {
+        question: "Where did the sun come from?",
+        answers: [
+            { text: "Space ship", correct: false },
+            { text: "9", correct: false },
+            { text: "pizza", correct: true },
+            { text: "110", correct: false }
+        ],
+
+    },
+    {
+        question: "Who had the high ground?",
+        answers: [
+            { text: 'Anakin Skywalker', correct: true },
+            { text: 'Barack Obama', correct: false },
+            { text: 'Obiwan Kanobi', correct: false },
+            { text: 'The Mario Brothers', correct: false }
+        ],
+
+    },
+    {
+        question: "Who does all the base belong to?",
+        answers: [
+            { text: 'Us', correct: true },
+            { text: 'You', correct: false },
+            { text: 'Everybody!', correct: false },
+            { text: 'We live in a society', correct: false }
+        ],
+
+    },
+]
 var count = 75;
 
 var score = 0;
 
+function evalQuestion() {
+    console.log(this)
+}
 
 let shuffledQuestions, currentQuestionIndex
 
-startBtn.addEventListener("click", startQuiz);
-nextBtn.addEventListener("click", () => {
-    currentQuestionIndex++
-    setNextQuestion()
-})
+//
+
 // get the next question
+
 function setNextQuestion() {
+    // console.log(this.value)
     resetState();
     showQuestion(shuffledQuestions[currentQuestionIndex])
     if (questions === true) {
         score++;
+
         return score;
 
     } else {
         timeSetup - 5;
     }
-    console.log(score)
+
 }
 // go back to default after each question
 function resetState() {
@@ -47,12 +92,18 @@ function showQuestion(question) {
         var button = document.createElement('button')
         button.innerText = answer.text
         button.classList.add('btn')
+        button.setAttribute('id', 'btnAnswer')
         if (answer.correct) {
             button.dataset.correct = answer.correct
+            score++;
+            console.log(score)
         }
         button.addEventListener('click', selectAnswer)
         answerBtnElement.appendChild(button)
+
     })
+    var btnAnswerEl = document.getElementById("btnAnswer")
+    btnAnswerEl.addEventListener("click", evalQuestion);
 }
 
 function selectAnswer(e) {
@@ -174,6 +225,7 @@ function veiwScores() {
     })
 
 }
+
 function endQuiz() {
     // call this inside interval
     // call this when on last question
@@ -186,47 +238,16 @@ function endQuiz() {
 
 
 };
-var questions = [
-    {
-        question: "What is the purpose Bootstrap?",
-        answers: [
-            { text: "Space ship", correct: false },
-            { text: "9", correct: false },
-            { text: "pizza", correct: true },
-            { text: "110", correct: false },
-        ],
-    },
-    {
-        question: "Where did the sun come from?",
-        answers: [
-            { text: "Space ship", correct: false },
-            { text: "9", correct: false },
-            { text: "pizza", correct: true },
-            { text: "110", correct: false }
-        ],
 
-    },
-    {
-        question: "Who had the high ground?",
-        answers: [
-            { text: 'Anakin Skywalker', correct: true },
-            { text: 'Barack Obama', correct: false },
-            { text: 'Obiwan Kanobi', correct: false },
-            { text: 'The Mario Brothers', correct: false }
-        ],
 
-    },
-    {
-        question: "Who does all the base belong to?",
-        answers: [
-            { text: 'Us', correct: true },
-            { text: 'You', correct: false },
-            { text: 'Everybody!', correct: false },
-            { text: 'We live in a society', correct: false }
-        ],
+startBtn.addEventListener("click", startQuiz);
+nextBtn.addEventListener("click", function () {
 
-    },
-]
+    currentQuestionIndex++
+    setNextQuestion();
+})
+
+
 
 
 
