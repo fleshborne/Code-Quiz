@@ -1,14 +1,19 @@
-var quizQuestions = [
-    {
-        question: "What is the purpose Bootstrap",
-        choices: ["Space ship", "9", "pizza", "110"],
-        answer: "Space ship"
-    },
-    {
-        question: "Where did the sun come from",
-        choices: ["mars", "dogs", "pizza", "110"],
-        answer: "mars"
-    },
-]
+// var quizQuestions = [
+//     {
+//         question: "What is the purpose Bootstrap",
+//         choices: [
+//             { text: "Space ship", correct: false },
+//             { text: "9", correct: false },
+//             { text: "pizza", correct: true },
+//             { text: "110", correct: false },
+//         ]
 
-// for each loop to display all questions 
+//     },
+//     {
+//         question: "Where did the sun come from",
+//         choices: ["mars", "dogs", "pizza", "110"],
+//         answer: "mars"
+//     },
+// ]
+
+// // for each loop to display all questions 
