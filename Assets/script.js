@@ -137,19 +137,19 @@ function endQuiz() {
 };
 var questions = [
     {
-        question: "What is the purpose Bootstrap",
+        question: "What is the purpose Bootstrap?",
         answers: [
             { text: "Space ship", correct: false },
             { text: "9", correct: false },
             { text: "pizza", correct: true },
             { text: "110", correct: false },
         ],
-        score: 1
+
 
 
     },
     {
-        question: "Where did the sun come from",
+        question: "Where did the sun come from?",
         answers: [
             { text: "Space ship", correct: false },
             { text: "9", correct: false },
@@ -157,8 +157,26 @@ var questions = [
             { text: "110", correct: false }
         ]
     },
+    {
+        question: "Who had the high ground?",
+        answers: [
+            { text: 'Anakin Skywalker', correct: true },
+            { text: 'Barack Obama', correct: false },
+            { text: 'Obiwan Kanobi', correct: false },
+            { text: 'The Mario Brothers', correct: false }
+        ]
+    },
+    {
+        question: "Who does all the base belong to?",
+        answers: [
+            { text: 'Us', correct: true },
+            { text: 'You', correct: false },
+            { text: 'Everybody!', correct: false },
+            { text: 'We live in a society', correct: false }
+        ]
+    }
 
-];
+]
 
 // for each loop to display all questions 
 
