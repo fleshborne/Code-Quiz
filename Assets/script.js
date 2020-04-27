@@ -5,7 +5,10 @@ var timeSetup = document.querySelector(".nav-text");
 var questionEl = document.querySelector("#question");
 var questionElContainer = document.querySelector("#question-container")
 var answerBtnElement = document.querySelector("#answer-buttons");
+var scoreContainer = document.querySelector("#score-container");
 var count = 75;
+
+var score = 0;
 
 
 let shuffledQuestions, currentQuestionIndex
@@ -19,7 +22,14 @@ nextBtn.addEventListener("click", () => {
 function setNextQuestion() {
     resetState();
     showQuestion(shuffledQuestions[currentQuestionIndex])
+    if (questions === true) {
+        score++;
+        return score;
 
+    } else {
+        timeSetup - 5;
+    }
+    console.log(score)
 }
 // go back to default after each question
 function resetState() {
@@ -32,6 +42,7 @@ function resetState() {
 function showQuestion(question) {
     //show the first question => we need a function that's going to showQuestion
     questionEl.innerText = question.question
+    // for each loop to display all questions 
     question.answers.forEach(answer => {
         var button = document.createElement('button')
         button.innerText = answer.text
@@ -47,6 +58,7 @@ function showQuestion(question) {
 function selectAnswer(e) {
     var selectedButton = e.target
     var correct = selectedButton.dataset.correct
+    // var wrong = selectedButton.dataset.false
     setStatusClass(document.body, correct)
     Array.from(answerBtnElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
@@ -58,6 +70,7 @@ function selectAnswer(e) {
         nextBtn.innerText = 'Restart!'
         startBtn.classList.remove('hide')
         nextBtn.classList.remove('hide')
+        endQuiz();
     }
 }
 
@@ -100,9 +113,10 @@ function startQuiz() {
         //    re-render the current count
     }, 1000);
 
+
     // shuffle questions so they never appear in same order 
 
-    shuffledQuestions = questions.sort(() => Math.random() - .5)
+    shuffledQuestions = questions.sort(() => Math.random() - .5);
     setNextQuestion();
 
 };
@@ -120,9 +134,46 @@ function clearStatusClass(element) {
 }
 
 function calculateScore() {
-    return Math.round(correct * 2);
+    return Math.round(score * 2);
 }
+function saveScore(score) {
+    //    create a score object to put in local storage
+    var scoreObject = {
+        score: score,
+    };
+    // add this score object to the current scores
+    // 1. get all of the scores from local storage
+    var scores = getScores();
 
+    // 2. JSON.parse the value from local storage to get an array
+    // 3. Pushour score object onto the existing score array
+    scores.push(scoreObject);
+    // 4. JSON.stringify to turn our array into a string
+    var scoresJSON = JSON.stringify(scores);
+    // 5. store our new JSON in local storage
+    localStorage.getItem('scores', scoresJSON)
+}
+function getScores() {
+    var scores = localStorage.getItem("scores");
+    if (scores) {
+        return JSON.parse(scores);
+    }
+    return [];
+}
+function veiwScores() {
+    scoreContainer.classList.remove('hide');
+    var scores = getScores();
+    var tableBodyElement = document.createElement("<div>#score-body</div>")
+    scores.forEach(function (score) {
+        var tableRowElement = document.createElement("<tr>");
+        var scoreTd = document.createElement("<td>")
+            ("<td>").textContent = text(score.score);
+        tableRowElement.append(scoreTd);
+        tableBodyElement.append(tableRowElement);
+
+    })
+
+}
 function endQuiz() {
     // call this inside interval
     // call this when on last question
@@ -144,9 +195,6 @@ var questions = [
             { text: "pizza", correct: true },
             { text: "110", correct: false },
         ],
-
-
-
     },
     {
         question: "Where did the sun come from?",
@@ -155,7 +203,8 @@ var questions = [
             { text: "9", correct: false },
             { text: "pizza", correct: true },
             { text: "110", correct: false }
-        ]
+        ],
+
     },
     {
         question: "Who had the high ground?",
@@ -164,7 +213,8 @@ var questions = [
             { text: 'Barack Obama', correct: false },
             { text: 'Obiwan Kanobi', correct: false },
             { text: 'The Mario Brothers', correct: false }
-        ]
+        ],
+
     },
     {
         question: "Who does all the base belong to?",
@@ -173,12 +223,12 @@ var questions = [
             { text: 'You', correct: false },
             { text: 'Everybody!', correct: false },
             { text: 'We live in a society', correct: false }
-        ]
-    }
+        ],
 
+    },
 ]
 
-// for each loop to display all questions 
+
 
 
 

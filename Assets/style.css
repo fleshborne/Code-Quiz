@@ -4,6 +4,12 @@
     box-sizing: border-box;
 }
 
+:root {
+    --hue-neutral: 200;
+    --hue-wrong: 0;
+    --hue-correct: 145;
+}
+
 #score-container {
     display: none;
 
@@ -27,15 +33,24 @@
 }
 
 .btn {
-    background-color: cadetblue;
+    background-color: orange;
     border-radius: 5px;
     padding: 5px 10px;
     color: white;
     outline: none;
 }
 
+.btn.correct {
+    --hue: var(--hue-correct);
+}
+
+.btn-wrong {
+    --hue: var(--hue-wrong);
+}
+
 .btn:hover {
     border-color: black;
+    transition: ease;
 }
 
 .start-btn,
