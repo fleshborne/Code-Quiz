@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+#score-container {
+    display: none;
+
+}
+
 .container {
     margin: 10px;
     width: 800px;
